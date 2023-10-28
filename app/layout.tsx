@@ -2,7 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Roboto } from 'next/font/google'
-import Navbar from './components/navigation'
+import Navbar from './components/Navbar'
 import { AuthContextProvider } from "./context/AuthContext"
 import {textFont, titleFont, testFont} from "../util/fonts"
 
