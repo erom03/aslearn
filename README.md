@@ -1,7 +1,7 @@
 # ASLearn
 
 Version 2 of ASLang, a hackathon project.
-This version was made to continue work past the hackathon while still preserving the original repo
+This version was made to continue work past the hackathon while still preserving the original repo.
 
 ## About
 
