@@ -4,15 +4,16 @@ import { useContext, createContext, useState, useEffect } from "react";
 import { signInWithPopup, signOut, onAuthStateChanged, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../firebase";
 import { collection, doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 const AuthContext  = createContext();
 
-export const AuthContextProvider = ({children}) => {
+export const AuthContextProvider = async ({children}) => {
     const [user, setUser] = useState(null);
 
     const googleSignIn = () => {
         const provider = new GoogleAuthProvider;
-        signInWithPopup(auth, provider).then(async (result) => {
+        signInWithPopup(auth, provider).then((result) => {
             // This gives you a Google Access Token. You can use it to access the Google API.
             const credential = GoogleAuthProvider.credentialFromResult(result);
 
@@ -20,20 +21,23 @@ export const AuthContextProvider = ({children}) => {
             const user = result.user;
 
             // TODO: Finish adding user to database if they dont exist currently
-            const usersRef = collection(db, "users");
+            // Note i think this has to be made in its own js file since it needs
+            // to be async which isnt supported on client
+            /*
             const docRef = doc(db, "users", user.uid);
             const docSnap = await getDoc(docRef);
 
             // Check user exists in database
             if (!docSnap.exists()) {
                 // Create user in database
-                const userDoc = {
-                    uid: user.uid,
-                    lessonsCompleted: 0,
-                };
+                const usersRef = collection(db, "users");
 
-                await setDoc(doc(usersRef, "users"), userDoc);
+                await setDoc(doc(usersRef, user.uid), {
+                    email: user.email,
+                    lessonsCompleted: 0,
+                });
             }
+            */
 
             // IdP data available using getAdditionalUserInfo(result)
             // ...
