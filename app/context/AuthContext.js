@@ -2,7 +2,7 @@
 
 import { useContext, createContext, useState, useEffect } from "react";
 import { signInWithPopup, signOut, onAuthStateChanged, GoogleAuthProvider } from "firebase/auth";
-import { auth, writeUserData } from "../firebase";
+import { auth } from "../firebase";
 
 const AuthContext  = createContext();
 
@@ -17,8 +17,6 @@ export const AuthContextProvider = ({children}) => {
             const token = credential.accessToken;
             // The signed-in user info.
             const user = result.user;
-
-            writeUserData(user.uid, 0)
 
             // IdP data available using getAdditionalUserInfo(result)
             // ...
