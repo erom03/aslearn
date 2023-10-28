@@ -1,13 +1,12 @@
 import React from 'react'
 import Image from 'next/image'
-import GetVideo from './GetVideo'
 
 const VideoInput = () => {
   return (
     <section className="flex justify-center items-center columns-2 gap-x-48">
 
         <div className="w-1/3 aspect-square rounded-lg shadow-md ring-1 ring-black ring-opacity-5 grid place-content-center">
-                <GetVideo />
+                Camera goes here
         </div>
 
         <div className="w-1/3">    
