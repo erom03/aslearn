@@ -1,5 +1,4 @@
 import React from 'react';
-import GetOutput from "../components/getOutput"
 import util from 'node:util';
 import LessonCard from '../components/LessonCard';
 
