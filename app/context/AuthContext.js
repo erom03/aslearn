@@ -3,6 +3,7 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import { signInWithPopup, signOut, onAuthStateChanged, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../firebase";
+import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 
 const AuthContext  = createContext();
 
@@ -11,12 +12,28 @@ export const AuthContextProvider = ({children}) => {
 
     const googleSignIn = () => {
         const provider = new GoogleAuthProvider;
-        signInWithPopup(auth, provider).then((result) => {
+        signInWithPopup(auth, provider).then(async (result) => {
             // This gives you a Google Access Token. You can use it to access the Google API.
             const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
+
             // The signed-in user info.
             const user = result.user;
+
+            // TODO: Finish adding user to database if they dont exist currently
+            const usersRef = collection(db, "cities");
+            const docRef = doc(db, "users", user.uid);
+            const docSnap = await getDoc(docRef);
+
+            // Check user exists in database
+            if (!docSnap.exists()) {
+                // Create user in database
+                const userDoc = {
+                    uid: user.uid,
+                    lessonsCompleted: 0,
+                };
+
+                await setDoc(doc(usersRef, "users"), userDoc);
+            }
 
             // IdP data available using getAdditionalUserInfo(result)
             // ...
