@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html *
+{
+   font-size: 1em;
+   color: #000;
+
+}
+
+.logo-font{
+   font-family: Salsa, Impact, 'Young Serif', serif;
+   font-weight: bold;
+}
+
