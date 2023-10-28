@@ -20,7 +20,7 @@ export const AuthContextProvider = ({children}) => {
             const user = result.user;
 
             // TODO: Finish adding user to database if they dont exist currently
-            const usersRef = collection(db, "cities");
+            const usersRef = collection(db, "users");
             const docRef = doc(db, "users", user.uid);
             const docSnap = await getDoc(docRef);
 
