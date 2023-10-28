@@ -3,12 +3,11 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import { signInWithPopup, signOut, onAuthStateChanged, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../firebase";
-import { collection, doc, getDoc, setDoc } from "firebase/firestore";
-import { db } from "../firebase";
+import { CheckUser } from "../context/CheckForUser"
 
 const AuthContext  = createContext();
 
-export const AuthContextProvider = async ({children}) => {
+export const AuthContextProvider = ({children}) => {
     const [user, setUser] = useState(null);
 
     const googleSignIn = () => {
@@ -20,24 +19,9 @@ export const AuthContextProvider = async ({children}) => {
             // The signed-in user info.
             const user = result.user;
 
-            // TODO: Finish adding user to database if they dont exist currently
-            // Note i think this has to be made in its own js file since it needs
-            // to be async which isnt supported on client
-            /*
-            const docRef = doc(db, "users", user.uid);
-            const docSnap = await getDoc(docRef);
-
-            // Check user exists in database
-            if (!docSnap.exists()) {
-                // Create user in database
-                const usersRef = collection(db, "users");
-
-                await setDoc(doc(usersRef, user.uid), {
-                    email: user.email,
-                    lessonsCompleted: 0,
-                });
-            }
-            */
+            // Check if user exists in database
+            // if not, create user in database
+            CheckUser(user);
 
             // IdP data available using getAdditionalUserInfo(result)
             // ...
