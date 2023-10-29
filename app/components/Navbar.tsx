@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Logo from "./Logo";
-import { UserAuth } from "@/app/context/AuthContext";
+import { UserAuth } from "../firebase/AuthContext";
 
 const Navbar = () => {
   const { user, googleSignIn, logOut } = UserAuth();

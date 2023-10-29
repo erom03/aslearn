@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Roboto } from 'next/font/google'
 import Navbar from './components/Navbar'
-import { AuthContextProvider } from "./context/AuthContext"
+import { AuthContextProvider } from "./firebase/AuthContext"
 import {textFont, titleFont, testFont} from "../util/fonts"
 
 export const metadata: Metadata = {
